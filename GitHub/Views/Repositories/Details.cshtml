@@ -1,0 +1,52 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model GitHub.ViewModels.Repositories.RepositoryViewModel
+@inject UserManager<IdentityUser> UserManager
+@{
+    var userId = UserManager.GetUserId(this.User);
+    ViewData["Title"] = "Details";
+}
+<div class="row justify-content-center mt-4">
+    <div class="col-md-8">
+        <div class="component">
+            <div class="card ">
+                <div class="card-body">
+                    <span class="badge badge-success mb-2">
+                        Is public: @{
+                            if (Model.IsPublic == true)
+                            {
+                                <span>true</span>
+                            }
+                            else
+                            {
+                                <span>false</span>
+                            }}
+                    </span>
+                    <h4 class="card-title text-center">@Model.Name</h4>
+                    <p class="card-text text-center">@Model.Description</p>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <a asp-controller="Commits" asp-action="Create" asp-route-repositoryId="@Model.Id" class="btn btn-success rounded-pill">Commit</a>
+                        </div>
+                        <div class="col-md-3">
+                            <form asp-controller="PullRequests" asp-action="Create" asp-route-repositoryId="@Model.Id" method="post">
+                                <button type="submit" class="btn btn-primary rounded-pill">Pull Request</button>
+                            </form>
+                        </div>
+                        <div class="col-md-3">
+                            
+                            <a asp-controller="Issues" asp-action="Create" asp-route-repositoryId="@Model.Id" class="btn btn-warning rounded-pill">Issue</a>
+                        </div>
+                        @if (Model.UserId == userId)
+                        {
+                            <div class="col-md-3 text-right">
+                                <a asp-controller="Repositories" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger rounded-pill">Delete</a>
+                            </div>
+                        }
+                    </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>

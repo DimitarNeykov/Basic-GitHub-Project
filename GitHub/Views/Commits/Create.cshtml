@@ -1,0 +1,33 @@
+﻿@model GitHub.ViewModels.Commits.CommitCreateInputModel
+@{
+    ViewData["Title"] = "Add Commit";
+}
+
+<div class="section">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="header mb-3">
+                <h2 class="text-center">Add Commit To @Model.RepositoryName</h2>
+            </div>
+            <form method="post">
+                <div class="component">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-10">
+                            <div class="form-group text-center">
+                                <label asp-for="Message"></label>
+                                <textarea style="height: 200px" asp-for="Message" class="form-control is-valid"></textarea>
+                                <span asp-validation-for="Message" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row justify-content-center">
+                        <div class="col-lg-6 text-center">
+                            <button type="submit" class="btn btn-success btn-pill ">Add</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+﻿@model IEnumerable<GitHub.ViewModels.PullRequests.PullRequestViewModel>
+@{
+    ViewData["Title"] = "My Pull Requests";
+}
+
+<h3 class=" mt-3">My Pull Requests</h3>
+
+<table class="table table-bordered table-hover font-italic mt-4" id="dataTable" width="100%" cellspacing="0">
+    <thead>
+    <tr class="bg-primary text-white-50">
+        <th class="text-center align-middle">Repository Name</th>
+        <th class="text-center align-middle">Created On</th>
+        <th class="text-center align-middle">Delete</th>
+    </tr>
+    </thead>
+    <tfoot>
+    <tr class="bg-primary text-white-50">
+        <th class="text-center align-middle">Repository Name</th>
+        <th class="text-center align-middle">Created On</th>
+        <th class="text-center align-middle">Delete</th>
+    </tr>
+    </tfoot>
+    <tbody>
+    @{
+        foreach (var pullRequest in Model)
+        {
+            <tr>
+                <td class="text-center align-middle">@pullRequest.RepositoryName</td>
+                <td class="text-center align-middle">@pullRequest.CreatedOn.ToString("dd.MM.yyyy")</td>
+                <td class="text-center align-middle">
+                    <a asp-controller="PullRequests" asp-action="Delete" asp-route-id="@pullRequest.Id" asp-fragment="guestInformation" class="btn btn-danger w-100">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+        }
+    }
+    </tbody>
+</table>

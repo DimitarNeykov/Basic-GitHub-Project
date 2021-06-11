@@ -1,0 +1,42 @@
+﻿@model IEnumerable<GitHub.ViewModels.Commits.CommitViewModel>
+@{
+    ViewData["Title"] = "My Commits";
+}
+
+<h3 class=" mt-3">My Commits</h3>
+
+<table class="table table-bordered table-hover font-italic mt-4" id="dataTable" width="100%" cellspacing="0">
+    <thead>
+        <tr class="bg-primary text-white-50">
+            <th class="text-center align-middle">Repository Name</th>
+            <th class="text-center align-middle">Message</th>
+            <th class="text-center align-middle">Created On</th>
+            <th class="text-center align-middle">Delete</th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr class="bg-primary text-white-50">
+            <th class="text-center align-middle">Repository Name</th>
+            <th class="text-center align-middle">Message</th>
+            <th class="text-center align-middle">Created On</th>
+            <th class="text-center align-middle">Delete</th>
+        </tr>
+    </tfoot>
+    <tbody>
+        @{
+            foreach (var commit in Model)
+            {
+                <tr>
+                    <td class="text-center align-middle">@commit.RepositoryName</td>
+                    <td class="text-center align-middle">@commit.Message</td>
+                    <td class="text-center align-middle">@commit.CreatedOn.ToString("dd.MM.yyyy")</td>
+                    <td class="text-center align-middle">
+                        <a asp-controller="Commits" asp-action="Delete" asp-route-id="@commit.Id" asp-fragment="guestInformation" class="btn btn-danger w-100">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

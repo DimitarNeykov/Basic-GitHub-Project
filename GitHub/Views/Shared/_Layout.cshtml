@@ -1,0 +1,71 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - GitHub</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="~/css/demo.css" rel="stylesheet" />
+    <link href="~/css/lazy.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" asp-action="Index" asp-controller="Home">GitHub</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown-7" aria-controls="navbarNavDropdown-7"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown-7">
+                    @{
+                        if (this.SignInManager.IsSignedIn(this.User))
+                        {
+                            <ul class="navbar-nav">
+                                <li class="nav-item mx-2">
+                                    <a class="nav-link" asp-action="Create" asp-controller="Repositories" role="button">Create Repos</a>
+                                </li>
+                                <li class="nav-item mx-2">
+                                    <a class="nav-link" asp-action="PublicRepo" asp-controller="Repositories" role="button">Public Repos</a>
+                                </li>
+                                <li class="nav-item mx-2">
+                                    <a class="nav-link" asp-action="MyRepo" asp-controller="Repositories" role="button">My Repos</a>
+                                </li>
+                                <li class="nav-item mx-2">
+                                    <a class="nav-link" asp-action="MyIssues" asp-controller="Issues" role="button">Issues</a>
+                                </li>
+                                <li class="nav-item mx-2">
+                                    <a class="nav-link" asp-action="MyCommits" asp-controller="Commits" role="button">Commits</a>
+                                </li>
+                                <li class="nav-item mx-2">
+                                    <a class="nav-link" asp-action="MyPullRequests" asp-controller="PullRequests" role="button">Pull Requests</a>
+                                </li>
+                            </ul>
+                        }}
+                    <ul class="navbar-nav ml-auto text-white">
+                        <partial name="_LoginPartial" />
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2021 - GitHub - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

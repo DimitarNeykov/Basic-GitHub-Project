@@ -1,0 +1,22 @@
+﻿@model IEnumerable<GitHub.ViewModels.Repositories.RepositoryViewModel>
+@{
+    ViewData["Title"] = "My Repositories";
+}
+
+<div class="row justify-content-center mt-3 text-center">
+    @foreach (var repository in Model)
+    {
+        <div class="col-md-3 m-2">
+            <div class="component">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">@repository.Name</h4>
+                    </div>
+                    <div class="card-footer">
+                        <a asp-controller="Repositories" asp-action="Details" asp-route-id="@repository.Id" class="btn btn-primary">Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

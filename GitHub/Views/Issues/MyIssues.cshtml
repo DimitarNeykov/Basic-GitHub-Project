@@ -1,0 +1,45 @@
+﻿@model IEnumerable<GitHub.ViewModels.Issues.IssuesViewModel>
+@{
+    ViewData["Title"] = "My Issues";
+}
+
+<h3 class=" mt-3">My Issues</h3>
+
+<table class="table table-bordered table-hover font-italic mt-4" id="dataTable" width="100%" cellspacing="0">
+    <thead>
+        <tr class="bg-primary text-white-50">
+            <th class="text-center align-middle">Repository Name</th>
+            <th class="text-center align-middle">Title</th>
+            <th class="text-center align-middle">Comment</th>
+            <th class="text-center align-middle">Created On</th>
+            <th class="text-center align-middle">Delete</th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr class="bg-primary text-white-50">
+            <th class="text-center align-middle">Repository Name</th>
+            <th class="text-center align-middle">Title</th>
+            <th class="text-center align-middle">Comment</th>
+            <th class="text-center align-middle">Created On</th>
+            <th class="text-center align-middle">Delete</th>
+        </tr>
+    </tfoot>
+    <tbody>
+    @{
+        foreach (var issues in Model)
+        {
+            <tr>
+                <td class="text-center align-middle">@issues.RepositoryName</td>
+                <td class="text-center align-middle">@issues.Title</td>
+                <td class="text-center align-middle">@issues.Comment</td>
+                <td class="text-center align-middle">@issues.CreatedOn.ToString("dd.MM.yyyy")</td>
+                <td class="text-center align-middle">
+                    <a asp-controller="Issues" asp-action="Delete" asp-route-id="@issues.Id" asp-fragment="guestInformation" class="btn btn-danger w-100">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+        }
+    }
+    </tbody>
+</table>
